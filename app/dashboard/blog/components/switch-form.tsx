@@ -17,7 +17,7 @@ export default function SwitchForm({
 		e.preventDefault();
 
 		try {
-			const { error } = JSON.parse(await onSubmit());
+			const { error } = JSON.parse( await onSubmit());
 			if (error) {
 				toast({
 					variant: "destructive",

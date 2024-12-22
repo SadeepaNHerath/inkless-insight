@@ -1,4 +1,4 @@
-"use client";
+"use server";
 import { Database } from "@/lib/types/supabase";
 import { createBrowserClient } from "@supabase/ssr";
 import React, { useEffect, useState } from "react";

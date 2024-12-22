@@ -1,4 +1,4 @@
-"use client";
+"use server";
 import React, { ChangeEvent, useTransition } from "react";
 import { FaBolt } from "react-icons/fa6";
 import { useUser } from "@/lib/store/user";

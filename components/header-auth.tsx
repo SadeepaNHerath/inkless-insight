@@ -1,11 +1,9 @@
 "use client";
 
 import { signOutAction } from "@/app/actions";
-import { hasEnvVars } from "@/utils/supabase/check-env-vars";
 import Link from "next/link";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
-import { createClient } from "@/utils/supabase/server";
 import { MdDashboard } from 'react-icons/md';
 import { FaBlogger } from "react-icons/fa";
 
@@ -16,11 +14,13 @@ import {
 } from "@/components/ui/popover"
 import { LockOpenIcon } from "lucide-react";
 import ManageBill from "./stripe/manage-bill";
+import { hasEnvVars } from "@/app/utils/supabase/check-env-vars";
+import { createClient } from "@/app/utils/supabase/client";
 import { useUser } from "@/lib/store/user";
 
 
 export default async function AuthButton() {  
-  const supabase = await createClient();
+  const supabase = createClient();
 
   const user = useUser((state: { user: any; }) => state.user);
 
@@ -58,8 +58,8 @@ export default async function AuthButton() {
           </div>
         </div>
       </>
-    );
-  }
+    )
+  } 
   return user ? (
     <Popover>
       <PopoverTrigger>
