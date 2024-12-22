@@ -42,13 +42,13 @@ export default async function BlogTable() {
 								</h1>
 
 								<SwitchForm
-									checked={blog.is_premium}
+									checked={blog.is_premium!}
 									onSubmit={updatePremium}
 									name="premium"
 								/>
 
 								<SwitchForm
-									checked={blog.is_published}
+									checked={blog.is_published!}
 									onSubmit={updatePublished}
 									name="publish"
 								/>
