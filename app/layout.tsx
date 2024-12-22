@@ -1,4 +1,3 @@
-import DeployButton from "@/components/deploy-button";
 import { EnvVarWarning } from "@/components/env-var-warning";
 import HeaderAuth from "@/components/header-auth";
 import { ThemeSwitcher } from "@/components/theme-switcher";
@@ -37,38 +36,50 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main className="min-h-screen flex flex-col items-center">
-            <div className="flex-1 w-full flex flex-col gap-20 items-center">
-              <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-                <div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm">
-                  <div className="flex gap-5 items-center font-semibold">
-                    <Link href={"/"}>Next.js Supabase Starter</Link>
-                    <div className="flex items-center gap-2">
-                      <DeployButton />
-                    </div>
-                  </div>
+          <main className="min-h-screen flex flex-col justify-center items-center">
+            <nav className="sticky top-0 z-50 w-full bg-background/90 backdrop-blur-md border-b border-b-foreground/10">
+              <div className="container mx-auto max-w-5xl flex justify-between items-center p-3 px-4">
+                <div className="flex items-center gap-4">
+                  <Link
+                    href="/"
+                    className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+                    aria-label="Inkless Insight Home"
+                  >
+                    <span className="font-semibold text-lg">Inkless Insight</span>
+                    <svg className="h-8 w-8 text-gray-500" width="24"  height="24"  xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  strokeWidth="2"  strokeLinecap="round"  strokeLinejoin="round">  <path d="M12 19l7-7 3 3-7 7-3-3z" />  <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />  <path d="M2 2l7.586 7.586" />  <circle cx="11" cy="11" r="2" /></svg>                  
+                    </Link>
+                </div>
+
+                <div className="flex items-center gap-4">
+                  <ThemeSwitcher />
                   {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
                 </div>
-              </nav>
-              <div className="flex flex-col gap-20 max-w-5xl p-5">
-                {children}
               </div>
+            </nav>
 
-              <footer className="w-full flex items-center justify-center border-t mx-auto text-center text-xs gap-8 py-16">
-                <p>
+              {children}
+
+            <footer className="w-full bg-muted/10 border-t py-12">
+              <div className="container mx-auto max-w-5xl px-4 flex flex-col md:flex-row justify-between items-center text-sm">
+                <p className="mb-4 md:mb-0">
                   Powered by{" "}
                   <a
-                    href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
+                    href="https://supabase.com"
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="font-bold hover:underline"
-                    rel="noreferrer"
                   >
                     Supabase
                   </a>
                 </p>
-                <ThemeSwitcher />
-              </footer>
-            </div>
+
+                <nav className="flex space-x-4">
+                  <a href="/about" className="hover:underline">About</a>
+                  <a href="/contact" className="hover:underline">Contact</a>
+                  <a href="/privacy" className="hover:underline">Privacy Policy</a>
+                </nav>
+              </div>
+            </footer>
           </main>
         </ThemeProvider>
       </body>
