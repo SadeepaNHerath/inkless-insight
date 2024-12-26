@@ -37,13 +37,13 @@ export type IBlogForm = {
 };
 
 export type Iuser = {
-	created_at: string;
-	display_name: string;
-	email: string;
 	id: string;
-	image_url: string;
+	created_at: string;
+	email: string;
+	profile_pic: string;
+	display_name: string;
 	role: string;
-	stripe_customer_id: string | null;
+	is_subscribed: boolean;
 	stripe_subscriptoin_id: string | null;
-	subscription_status: boolean;
+	stripe_customer_id: string | null;
 } | null;

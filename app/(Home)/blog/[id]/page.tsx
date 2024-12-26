@@ -11,26 +11,26 @@ export async function generateStaticParams() {
 	return blogs;
 }
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
-	const { data: blog } = (await fetch(
-		process.env.SITE_URL + "/api/blog?id=" + params.id
-	).then((res) => res.json())) as { data: IBlog };
+// export async function generateMetadata({ params }: { params: { id: string } }) {
+// 	const { data: blog } = (await fetch(
+// 		process.env.SITE_URL + "/api/blog?id=" + params.id
+// 	).then((res) => res.json())) as { data: IBlog };
 
-	return {
-		title: blog?.title,
-		authors: {
-			name: "chensokheng",
-		},
-		openGraph: {
-			title: blog?.title,
-			url: "https://dailyblog-demo.vercel.app/blog" + params.id,
-			siteName: "Inkless Insight",
-			images: blog?.image_url,
-			type: "website",
-		},
-		keywords: ["daily web coding", "chensokheng", "dailywebcoding"],
-	};
-}
+// 	return {
+// 		title: blog?.title,
+// 		authors: {
+// 			name: "chensokheng",
+// 		},
+// 		openGraph: {
+// 			title: blog?.title,
+// 			url: "https://dailyblog-demo.vercel.app/blog" + params.id,
+// 			siteName: "Inkless Insight",
+// 			images: blog?.image_url,
+// 			type: "website",
+// 		},
+// 		keywords: ["daily web coding", "chensokheng", "dailywebcoding"],
+// 	};
+// }
 
 export default async function page({ params }: { params: { id: string } }) {
 	const { data: blog } = (await fetch(

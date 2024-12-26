@@ -1,5 +1,4 @@
-"use client";
-
+"use server";
 import { signOutAction } from "@/app/actions";
 import Link from "next/link";
 import { Button } from "./ui/button";
@@ -11,13 +10,25 @@ import {
 } from "@/components/ui/popover";
 import { LockOpenIcon } from "lucide-react";
 import ManageBill from "./stripe/manage-bill";
-import { useUser } from "@/lib/store/user";
+import { createClient } from "@/app/utils/supabase/server";
+import { console } from "inspector";
 
-export default async function HeaderAuth() {
-  const user = useUser((state: { user: any }) => state.user);
+export default  async function HeaderAuth() {
+  let customerId = null;
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  const isAdmin = user?.role === "admin";
-  const isSub = user?.stripe_customer_id;
+  const { data, error } = await supabase
+    .from('users')
+    .select('*')
+    .eq('id', user?.id);
+
+    const isAdmin = data?.[0]?.role === "admin";
+    const isSub = data?.[0]?.is_subscribed;
+    console.log(isAdmin);
+
 
   return (
     <Popover>
@@ -50,8 +61,8 @@ export default async function HeaderAuth() {
           </Link>
         )}
 
-        {!isAdmin && isSub && (
-          <ManageBill customerId={user.stripe_customer_id} />
+        {isAdmin && isSub && (
+          <ManageBill customerId={user?.id!} />
         )}
 
         <Button

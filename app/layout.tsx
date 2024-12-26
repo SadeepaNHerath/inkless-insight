@@ -1,5 +1,3 @@
-"use client";
-
 import { EnvVarWarning } from "@/components/env-var-warning";
 import HeaderAuth from "@/components/header-auth";
 import { ThemeSwitcher } from "@/components/theme-switcher";
@@ -7,8 +5,10 @@ import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import Link from "next/link";
 import "./globals.css";
-import { hasEnvVars } from "./utils/supabase/check-env-vars";
 import { useUser } from "@/lib/store/user";
+import { Toaster } from "@/components/ui/toaster";
+import SessisonProvider from "@/components/session-provider";
+import { createClient } from "./utils/supabase/server";
 
 // const defaultUrl = process.env.VERCEL_URL
 //   ? `https://${process.env.VERCEL_URL}`
@@ -25,12 +25,15 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const user = useUser((state) => state.user);
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   return (
     <html lang="en" className={geistSans.className} suppressHydrationWarning>
       <body className="bg-background text-foreground">
@@ -56,7 +59,7 @@ export default function RootLayout({
 
                 <div className="flex items-center gap-4">
                   <ThemeSwitcher />
-                  {!user ? <EnvVarWarning /> : <HeaderAuth />}
+                  {!user ? <EnvVarWarning /> : <HeaderAuth/>}
                 </div>
               </div>
             </nav>
@@ -86,6 +89,8 @@ export default function RootLayout({
             </footer>
           </main>
         </ThemeProvider>
+        <Toaster />
+				<SessisonProvider />
       </body>
     </html>
   );

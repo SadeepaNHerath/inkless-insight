@@ -2,7 +2,6 @@ import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
-	const { pathname } = request.nextUrl;
 
 	let response = NextResponse.next({
 		request: {
@@ -62,12 +61,12 @@ export async function middleware(request: NextRequest) {
 
 	if (data.session) {
 		if (
-			data.session.user.user_metadata.role !== "admin"
+			data.session.user.role !== "admin"
 		) {
 			return NextResponse.redirect(new URL("/", request.url));
 		}
 	} else {
-		return NextResponse.redirect(new URL("/", request.url));
+		return NextResponse.redirect(new URL("/dashboard", request.url));
 	}
 }
 
