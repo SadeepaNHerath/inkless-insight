@@ -28,7 +28,7 @@ export async function createBlog(data: {
 	} else {
 		const result = await supabase
 			.from("blog_content")
-			.insert({ blog_id: blogResult?.data?.id!, content: data.content });
+			.insert({ id: blogResult?.data?.id!, content: data.content });
 
 		revalidatePath(DASHBOARD);
 		return JSON.stringify(result);
@@ -77,7 +77,7 @@ export async function readBlogContent(blogId: string) {
 	return await supabase
 		.from("blog_content")
 		.select("content")
-		.eq("blog_id", blogId)
+		.eq("id", blogId)
 		.single();
 }
 
@@ -106,7 +106,7 @@ export async function updateBlogDetail(
 		const result = await supabase
 			.from("blog_content")
 			.update({ content: data.content })
-			.eq("blog_id", blogId);
+			.eq("id", blogId);
 		revalidatePath(DASHBOARD);
 		revalidatePath("/blog/" + blogId);
 

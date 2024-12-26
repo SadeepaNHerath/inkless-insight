@@ -16,7 +16,7 @@ export type IBlogDetial = {
 	is_published: boolean;
 	title: string;
 	blog_content: {
-		blog_id: string;
+		id: string;
 		content: string;
 		created_at: string;
 	};
@@ -30,7 +30,7 @@ export type IBlogForm = {
 	is_published: boolean;
 	title: string;
 	blog_content: {
-		blog_id: string;
+		id: string;
 		content: string;
 		created_at: string;
 	};

@@ -103,7 +103,28 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_admin: {
+        Args: {
+        }
+        Returns: boolean
+      }
+      is_premium: {
+        Args: {
+          id: string
+        }
+        Returns: boolean
+      }
+      is_published: {
+        Args: {
+          id: string
+        }
+        Returns: boolean
+      }
+      is_subscribed: {
+        Args: {
+        }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never

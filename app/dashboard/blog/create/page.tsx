@@ -4,9 +4,9 @@ import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { createBlog } from "../../../../lib/actions/blog";
 import { BlogFormSchemaType } from "../schema";
 import { useRouter } from "next/navigation";
-import { toast } from "@/hooks/use-toast";
 import BlogForm from "../components/blog-form";
 import { defaultCreateBlog } from "@/lib/data";
+import { toast } from "@/components/ui/use-toast";
 
 export default function CreateForm() {
   const router = useRouter();

@@ -1,5 +1,3 @@
-"use server";
-
 import Stripe from "stripe";
 import { headers } from "next/headers";
 import { createSupbaseAdmin } from "@/lib/supabase";

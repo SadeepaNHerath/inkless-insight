@@ -81,7 +81,7 @@ export const defaultCreateBlog: IBlogDetial = {
 	blog_content : {
 		created_at: "",
 		content: "",
-		blog_id: "",
+		id: "",
 	},
 };
 

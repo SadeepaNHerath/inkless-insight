@@ -1,4 +1,4 @@
-"use server";
+"use client";
 import { Database } from "@/lib/types/supabase";
 import { createBrowserClient } from "@supabase/ssr";
 import React, { useEffect, useState } from "react";
@@ -9,7 +9,7 @@ import Checkout from "@/components/stripe/checkout";
 export default function Content({ blogId }: { blogId: string }) {
   const [loading, setLoading] = useState(true);
   const [blog, setBlog] = useState<{
-    blog_id: string;
+    id: string;
     content: string;
     created_at: string;
   } | null>(null);
@@ -24,7 +24,7 @@ export default function Content({ blogId }: { blogId: string }) {
       const { data, error } = await supabase
         .from("blog_content")
         .select("*")
-        .eq("blog_id", blogId)
+        .eq("id", blogId)
         .single();
 
       if (error) {
@@ -32,7 +32,7 @@ export default function Content({ blogId }: { blogId: string }) {
         setBlog(null);
       } else {
         setBlog({
-          blog_id: data.id,
+          id: data.id,
           content: data.content,
           created_at: data.created_at,
         });

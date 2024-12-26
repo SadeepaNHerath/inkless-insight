@@ -1,5 +1,3 @@
-"use server";
-
 import React from "react";
 import { RxEyeOpen } from "react-icons/rx";
 import { MdOutlineEdit } from "react-icons/md";

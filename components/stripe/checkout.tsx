@@ -1,4 +1,4 @@
-"use server";
+"use client";
 import React, { ChangeEvent, useTransition } from "react";
 import { FaBolt } from "react-icons/fa6";
 import { useUser } from "@/lib/store/user";
@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 import { EnvVarWarning } from "../env-var-warning";
 
 
-export default function Checkout() {
+export default async function Checkout() {
   const pathname = usePathname();
 
   const [isPending, startTransition] = useTransition();

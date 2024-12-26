@@ -15,8 +15,8 @@ import { ChangeEvent, useTransition } from "react";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { cn } from "@/lib/utils";
-import { toast } from "@/hooks/use-toast";
 import { deleteBlogById } from "@/lib/actions/blog";
+import { toast } from "@/components/ui/use-toast";
 
 export default function DeleteAlert({ id }: { id: string }) {
 	const [isPending, startTransition] = useTransition();

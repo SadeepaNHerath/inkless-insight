@@ -1,3 +1,5 @@
+"use client";
+
 import { EnvVarWarning } from "@/components/env-var-warning";
 import HeaderAuth from "@/components/header-auth";
 import { ThemeSwitcher } from "@/components/theme-switcher";
@@ -6,6 +8,7 @@ import { ThemeProvider } from "next-themes";
 import Link from "next/link";
 import "./globals.css";
 import { hasEnvVars } from "./utils/supabase/check-env-vars";
+import { useUser } from "@/lib/store/user";
 
 // const defaultUrl = process.env.VERCEL_URL
 //   ? `https://${process.env.VERCEL_URL}`
@@ -27,6 +30,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const user = useUser((state) => state.user);
   return (
     <html lang="en" className={geistSans.className} suppressHydrationWarning>
       <body className="bg-background text-foreground">
@@ -52,7 +56,7 @@ export default function RootLayout({
 
                 <div className="flex items-center gap-4">
                   <ThemeSwitcher />
-                  {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
+                  {!user ? <EnvVarWarning /> : <HeaderAuth />}
                 </div>
               </div>
             </nav>
